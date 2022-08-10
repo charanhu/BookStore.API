@@ -12,6 +12,7 @@ namespace BookStore.API.Repository
         {
             _context = context;
         }
+        //Get all books
         public async Task<List<BookModel>> GetAllBooksAsync()
         {
             var records = await _context.Books.Select(x => new BookModel()
@@ -23,6 +24,7 @@ namespace BookStore.API.Repository
 
             return records;
         }
+        // GET: api/Books/5
         public async Task<BookModel> GetBookByIdAsync(int bookId)
         {
             var records = await _context.Books.Where(x=>x.Id==bookId).Select(x => new BookModel()
@@ -34,7 +36,7 @@ namespace BookStore.API.Repository
 
             return records;
         }
-
+        // POST: api/Books
         public async Task<int> AddBooksAsync(BookModel bookModel)
         {
             var book = new Books()
@@ -47,7 +49,7 @@ namespace BookStore.API.Repository
 
             return book.Id;
         }
-
+        // PUT: api/Books/5
         public async Task UpdateBookAsync(int bookId, BookModel bookModel)
         {
             //var book = await _context.Books.FindAsync(bookId);
@@ -68,6 +70,7 @@ namespace BookStore.API.Repository
             _context.Books.Update(book);
             await _context.SaveChangesAsync();
         }
+        //Delete api/books/1
         public async Task DeleteBookAsync(int bookId)
         {
             var book = await _context.Books.FindAsync(bookId);
