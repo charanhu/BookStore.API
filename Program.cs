@@ -24,6 +24,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+var scope = app.Services.CreateScope();
+var data = scope.ServiceProvider.GetRequiredService<BookStoreContext>();
+data.Database.EnsureCreated();  
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
